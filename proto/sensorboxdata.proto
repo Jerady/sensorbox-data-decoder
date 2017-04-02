@@ -4,7 +4,6 @@ package sensorboxdata;
 option java_package = "de.jensd.proto";
 option java_outer_classname = "SensorBoxData";
 
-
 message SensorData {
     string id = 1;
     string name = 2;
