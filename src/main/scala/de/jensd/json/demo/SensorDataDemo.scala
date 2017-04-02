@@ -1,6 +1,7 @@
 package de.jensd.json.demo
 
 import de.jensd.json.JsonUtil
+import de.jensd.proto.sensorboxdata.{SensorBoxData, SensorData}
 
 /**
   * Created by jens on 20.03.17.
@@ -22,6 +23,8 @@ object SensorDataDemo extends App{
 
 
   println(JsonUtil.toPrettyJson(sensorDataJson))
+
+
 
 
 }
