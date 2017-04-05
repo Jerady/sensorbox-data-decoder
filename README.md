@@ -5,9 +5,10 @@ SensorBox Data Decoder implementation dedicated to be uses as custom payload dec
 
 See also: [addon-commons](https://github.com/Jerady/addon-commons) and [mqttfx-payload-decoders](https://github.com/Jerady/mqttfx-payload-decoders).
 
-## Proto Buffers
+## Protocol Buffers
 
-The SensorBox Data Decode decodes Proto Buffers encoded payload based on `proto/sensorboxdata.proto`
+The SensorBox Data Decoder decodes [Google Protocol Buffers](https://developers.google.com/protocol-buffers/)
+ encoded payload based on `proto/sensorboxdata.proto`
 ```
 syntax = "proto3";
 package sensorboxdata;
@@ -19,8 +20,8 @@ message SensorData {
     string id = 1;
     string name = 2;
     string description = 3;
-    string time  = 4;
-    string value = 5;
+    uint64 time  = 4;
+    double value = 5;
     string unit = 6;
 }
 
@@ -36,7 +37,7 @@ This project includes the [sbt-protoc](https://github.com/thesamet/sbt-protoc) p
 The proto case classes are created at `../target/scala-2.11/src_managed/main`.
 
 
-## Create addon package
+## Create add-on package for MQTT.fx
 
 `sbt assembly`
 
