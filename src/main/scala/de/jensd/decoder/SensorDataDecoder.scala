@@ -2,6 +2,7 @@ package de.jensd.decoder
 
 import java.io.ByteArrayInputStream
 
+import com.google.protobuf.InvalidProtocolBufferException
 import de.jensd.addon.decoder.{AbstractPayloadDecoder, PayloadDecoder}
 import de.jensd.proto.sensorboxdata.{SensorBoxData, SensorData}
 
@@ -22,11 +23,23 @@ object SensorDataDecoder{
       s"""|id=${sensorData.id}
          |name=${sensorData.name}
          |description=${sensorData.description}
-         |description=${sensorData.time}
-         |description=${sensorData.value}
-         |description=${sensorData.unit}
+         |time=${sensorData.time}
+         |value=${sensorData.value}
+         |unit=${sensorData.unit}
          |
          |""".stripMargin
+    out
+  }
+
+  def invalidProtocolBufferMessage():String = {
+    val out =
+      s"""
+         |*************************************************
+         |*                                               *
+         |*       NOT a SensorBoxData proto payload       *
+         |*                                               *
+         |*************************************************
+       """.stripMargin
     out
   }
 }
@@ -40,10 +53,14 @@ class SensorDataDecoder extends AbstractPayloadDecoder{
   descriptionProperty().set("Decodes payload from Protobuffer to formatted string values")
 
   override def decode(payload: Array[Byte]): String = {
+    try{
     val sensorBoxData = SensorBoxData.parseFrom(new ByteArrayInputStream(payload))
     var data = SensorDataDecoder.toSensorBoxDataHeaderString(sensorBoxData)
     sensorBoxData.sensorData.foreach(data+=SensorDataDecoder.toSensorDataString(_))
     data
+    }catch{
+      case ex: InvalidProtocolBufferException => SensorDataDecoder.invalidProtocolBufferMessage
+    }
   }
 
 

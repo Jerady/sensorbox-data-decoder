@@ -8,8 +8,8 @@ message SensorData {
     string id = 1;
     string name = 2;
     string description = 3;
-    string time  = 4;
-    string value = 5;
+    uint64 time  = 4;
+    double value = 5;
     string unit = 6;
 }
 

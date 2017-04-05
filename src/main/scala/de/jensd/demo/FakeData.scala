@@ -19,8 +19,8 @@ object FakeData {
       id = "11",
       name = "Temperature",
       description = "Temperature of the living-room",
-      time = "2017-03-03T18:29:43",
-      value = "21.3",
+      time = 1491409210061l,
+      value = 21.3,
       unit = "Celsius"
     )
 
@@ -29,8 +29,8 @@ object FakeData {
       id = "11",
       name = "Humidity",
       description = "Humidity of the living-room",
-      time = "2017-03-03T18:29:43",
-      value = "55.3",
+      time = 1491409210061l,
+      value = 55.3,
       unit = "%"
     )
 }

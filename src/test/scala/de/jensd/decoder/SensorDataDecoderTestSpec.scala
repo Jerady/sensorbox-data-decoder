@@ -2,6 +2,7 @@ package de.jensd.decoder
 
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
 
+import com.google.protobuf.InvalidProtocolBufferException
 import de.jensd.demo.FakeData
 import de.jensd.proto.sensorboxdata.{SensorBoxData, SensorData}
 import org.scalatest.{FlatSpec, Matchers}
@@ -23,6 +24,13 @@ class SensorDataDecoderTestSpec extends FlatSpec with Matchers {
   }
 
 
+  "Decoding any other byte array" should "fail" in {
+    val byteArray = Array[Byte](100.toByte, 101.toByte, 102.toByte, 103.toByte)
+    val sensorDataDecoder = new SensorDataDecoder
+    var result = sensorDataDecoder.decode(byteArray)
+    result should === (SensorDataDecoder.invalidProtocolBufferMessage)
+  }
+
   def expectedResultString =
     """id=1
       |name=living-room
@@ -31,16 +39,16 @@ class SensorDataDecoderTestSpec extends FlatSpec with Matchers {
       |id=11
       |name=Temperature
       |description=Temperature of the living-room
-      |description=2017-03-03T18:29:43
-      |description=21.3
-      |description=Celsius
+      |time=1491409210061
+      |value=21.3
+      |unit=Celsius
       |
       |id=11
       |name=Humidity
       |description=Humidity of the living-room
-      |description=2017-03-03T18:29:43
-      |description=55.3
-      |description=%
+      |time=1491409210061
+      |value=55.3
+      |unit=%
       |
       |""".stripMargin
 
