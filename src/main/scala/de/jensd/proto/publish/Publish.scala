@@ -1,15 +1,27 @@
-package de.jensd.demo
+/**
+  * Copyright (c) 2017 Jens Deters http://www.jensd.de
+  *
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy of
+  * the License at
+  *
+  * http://www.apache.org/licenses/LICENSE-2.0
+  *
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  * License for the specific language governing permissions and limitations under
+  * the License.
+  *
+  */
+package de.jensd.proto.publish
 
-import de.jensd.decoder
-import de.jensd.decoder.Test
+
+import de.jensd.proto.util.FakeData
 import org.eclipse.paho.client.mqttv3.{MqttClient, MqttConnectOptions, MqttMessage}
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
-import de.jensd.proto.ProtoUtil._
-import org.apache.logging.log4j.core.config.plugins.util.ResolverUtil.Test
+import de.jensd.proto.util.ProtoUtil._
 
-/**
-  * Created by Jens Deters on 24.03.17.
-  */
 object Publish extends App {
 
   val brokerIP = "localhost"
