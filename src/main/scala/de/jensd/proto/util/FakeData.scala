@@ -21,7 +21,7 @@ import de.jensd.proto.sensorboxdata.{SensorBoxData, SensorData}
 object FakeData {
   def fakeSensorBoxData =
     SensorBoxData(
-      id = "1",
+      id = "lvgro-box-1",
       name = "living-room",
       description = "The sensorbox of the living-room",
       sensorData = Seq(fakeTemperatureSensorData, fakeHumiditySensorData)
@@ -29,7 +29,7 @@ object FakeData {
 
   def fakeTemperatureSensorData =
     SensorData(
-      id = "11",
+      id = "lvgro-tmp-1",
       name = "Temperature",
       description = "Temperature of the living-room",
       time = 1491409210061l,
@@ -39,7 +39,7 @@ object FakeData {
 
   def fakeHumiditySensorData =
     SensorData(
-      id = "11",
+      id = "lvgro-hum-1",
       name = "Humidity",
       description = "Humidity of the living-room",
       time = 1491409210061l,

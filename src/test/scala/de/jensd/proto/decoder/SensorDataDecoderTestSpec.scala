@@ -42,25 +42,24 @@ class SensorDataDecoderTestSpec extends FlatSpec with Matchers {
   }
 
   def expectedResultString =
-    """id=1
-      |name=living-room
-      |description=The sensorbox of the living-room
+    """id............: lvgro-box-1
+      |name..........: living-room
+      |description...: The sensorbox of the living-room
       |
-      |id=11
-      |name=Temperature
-      |description=Temperature of the living-room
-      |time=2017-04-05T18:20:10.061
-      |value=21.3
-      |unit=Celsius
+      |id............: lvgro-tmp-1
+      |name..........: Temperature
+      |description...: Temperature of the living-room
+      |time..........: 2017-04-05T18:20:10.061
+      |value.........: 21.3
+      |unit..........: Celsius
       |
-      |id=11
-      |name=Humidity
-      |description=Humidity of the living-room
-      |time=2017-04-05T18:20:10.061
-      |value=55.3
-      |unit=%
+      |id............: lvgro-hum-1
+      |name..........: Humidity
+      |description...: Humidity of the living-room
+      |time..........: 2017-04-05T18:20:10.061
+      |value.........: 55.3
+      |unit..........: %
       |
       |""".stripMargin
-
 
 }

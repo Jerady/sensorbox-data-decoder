@@ -24,32 +24,53 @@ import de.jensd.proto.util.ProtoUtil._
 
 object Publish extends App {
 
-  val brokerIP = "localhost"
-  val brokerURL = s"tcp://${brokerIP}:1883"
+  var brokerURL = "tcp://localhost:1883"
+  var topic = "sensorboxdata/demo"
+
+  args.length match{
+    case 1 => brokerURL = s"tcp://${args(0)}"
+    case 2 => brokerURL = s"tcp://${args(0)}"; topic = args(1)
+    case _ =>
+  }
+
   val clientId = "demo-client-1234"
   val persistence = new MemoryPersistence()
-
   val mqttClient = new MqttClient(brokerURL, clientId, persistence)
   val mqttConnectOptions = new MqttConnectOptions()
-
-  val topic = "demo/demo"
   val sensorBoxData = FakeData.fakeSensorBoxData
-
   val message = new MqttMessage(toPayload(sensorBoxData));
+
+  println(
+    s"""
+       |----------------------------------------------------------------------
+       | Publishing 10 MQTT messages with sensorboxdata.proto encoded payload
+       |----------------------------------------------------------------------
+       |
+       |Topic ........ : ${topic}
+       |Broker URL ... : ${brokerURL}
+     """.stripMargin)
+
+  print(
+    s"""
+       |[START]
+       |Connecting to ${brokerURL}... """.stripMargin)
 
   mqttClient.connect(mqttConnectOptions)
 
   if (mqttClient.isConnected) {
-    println(s"Connected to ${brokerURL}")
+    println("OK")
 
     for (i <- 1 to 10) {
       mqttClient.publish(topic, message);
-      System.out.println(s"Message #${i} published");
+      System.out.println(s"Message #${i} published to ${topic}");
       Thread.sleep(1000)
     }
 
     mqttClient.disconnect();
-    System.out.println("Disconnected");
+    println(
+      s"""Disconnected
+         |[DONE]
+         |""".stripMargin);
   }
 
 }

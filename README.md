@@ -9,6 +9,7 @@ See also: [addon-commons](https://github.com/Jerady/addon-commons) and [mqttfx-p
 
 The SensorBox Data Decoder decodes [Google Protocol Buffers](https://developers.google.com/protocol-buffers/)
  encoded payload based on `proto/sensorboxdata.proto`
+
 ```
 syntax = "proto3";
 package sensorboxdata;
@@ -33,11 +34,35 @@ message SensorBoxData {
 }
 ```
 
+Decoded payload looks like this in human readable format:
+
+```
+id............: lvgro-box-1
+name..........: living-room
+description...: The sensorbox of the living-room
+
+id............: lvgro-tmp-1
+name..........: Temperature
+description...: Temperature of the living-room
+time..........: 2017-04-05T18:20:10.061
+value.........: 21.3
+unit..........: Celsius
+
+id............: lvgro-hum-1
+name..........: Humidity
+description...: Humidity of the living-room
+time..........: 2017-04-05T18:20:10.061
+value.........: 55.3
+unit..........: %
+```
+
+
+
 This project includes the [sbt-protoc](https://github.com/thesamet/sbt-protoc) plugin.
 The proto case classes are created at `../target/scala-2.11/src_managed/main`.
 
 
-## Create add-on package for MQTT.fx
+## Create add-on package for MQTT.fx >=1.4.0
 
 `sbt assembly`
 
@@ -52,4 +77,51 @@ into the addon directory of MQTT.fx
 |**Mac OSX**|`[USER_HOME]/Library/Application Support/MQTT-FX/addons`|
 |**Windows**|`[USER_HOME]\AppData\Local\MQTT-FX\addons`|
 |**Linux**|`[USER_HOME]/MQTT-FX/addons`|
+
+
+## Publish demo MQTT messages
+
+`sbt run`
+
+Runs a Publisher to publish 10 MQTT messages with sensorboxdata.proto encoded payload.
+A per default it connects to Broker URL `tcp://localhost:1883` publishes by usind topic `sensorboxdata/demo`:
+
+
+```bash
+
+----------------------------------------------------------------------
+ Publishing 10 MQTT messages with sensorboxdata.proto encoded payload
+----------------------------------------------------------------------
+
+Topic ........ : sensorboxdata/demo
+Broker URL ... : tcp://localhost:1883
+     
+
+[START]
+Connecting to tcp://localhost:1883... OK
+
+Message #1 published to sensorboxdata/demo
+Message #2 published to sensorboxdata/demo
+Message #3 published to sensorboxdata/demo
+Message #4 published to sensorboxdata/demo
+Message #5 published to sensorboxdata/demo
+Message #6 published to sensorboxdata/demo
+Message #7 published to sensorboxdata/demo
+Message #8 published to sensorboxdata/demo
+Message #9 published to sensorboxdata/demo
+Message #10 published to sensorboxdata/demoDisconnected
+[DONE]
+```
+Meanwhile at MQTT.fx (note the choosen decoded at the bottom):
+
+![](images/mqttfx-proto-decoder.png)
+
+
+You can connect to a speecific broker name/ip and port by passing argument to the 'run' task: 
+
+`sbt "run 192.168.0.61:1883"`
+
+Additionally you can set a certain topic as 2nd :
+
+`sbt "run 192.168.0.61:1883 proto/demo"`
 

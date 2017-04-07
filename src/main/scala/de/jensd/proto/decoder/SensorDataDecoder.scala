@@ -28,24 +28,24 @@ object SensorDataDecoder{
 
   def toSensorBoxDataHeaderString(sensorBoxData:SensorBoxData):String = {
     val out =
-      s"""|id=${sensorBoxData.id}
-         |name=${sensorBoxData.name}
-         |description=${sensorBoxData.description}
-         |
-         |""".stripMargin
+      s"""|id............: ${sensorBoxData.id}
+          |name..........: ${sensorBoxData.name}
+          |description...: ${sensorBoxData.description}
+          |
+          |""".stripMargin
     out
   }
 
   def toSensorDataString(sensorData:SensorData):String = {
     val out =
-      s"""|id=${sensorData.id}
-         |name=${sensorData.name}
-         |description=${sensorData.description}
-         |time=${millisToDate(sensorData.time)}
-         |value=${sensorData.value}
-         |unit=${sensorData.unit}
-         |
-         |""".stripMargin
+      s"""|id............: ${sensorData.id}
+          |name..........: ${sensorData.name}
+          |description...: ${sensorData.description}
+          |time..........: ${millisToDate(sensorData.time)}
+          |value.........: ${sensorData.value}
+          |unit..........: ${sensorData.unit}
+          |
+          |""".stripMargin
     out
   }
 
