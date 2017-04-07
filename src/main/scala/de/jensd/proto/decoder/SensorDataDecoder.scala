@@ -17,6 +17,8 @@
 package de.jensd.proto.decoder
 
 import java.io.ByteArrayInputStream
+import java.time.{Instant, LocalDateTime, ZoneId}
+import java.time.format.DateTimeFormatter
 
 import com.google.protobuf.InvalidProtocolBufferException
 import de.jensd.addon.decoder.AbstractPayloadDecoder
@@ -39,12 +41,18 @@ object SensorDataDecoder{
       s"""|id=${sensorData.id}
          |name=${sensorData.name}
          |description=${sensorData.description}
-         |time=${sensorData.time}
+         |time=${millisToDate(sensorData.time)}
          |value=${sensorData.value}
          |unit=${sensorData.unit}
          |
          |""".stripMargin
     out
+  }
+
+  def millisToDate(timeInMillis:Long):String = {
+   val date =
+      LocalDateTime.ofInstant(Instant.ofEpochMilli(timeInMillis), ZoneId.systemDefault())
+    DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(date)
   }
 
   def invalidProtocolBufferMessage():String = {

@@ -49,14 +49,14 @@ class SensorDataDecoderTestSpec extends FlatSpec with Matchers {
       |id=11
       |name=Temperature
       |description=Temperature of the living-room
-      |time=1491409210061
+      |time=2017-04-05T18:20:10.061
       |value=21.3
       |unit=Celsius
       |
       |id=11
       |name=Humidity
       |description=Humidity of the living-room
-      |time=1491409210061
+      |time=2017-04-05T18:20:10.061
       |value=55.3
       |unit=%
       |
