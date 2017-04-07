@@ -1,6 +1,6 @@
 # SensorBox Data Decoder
 
-SensorBox Data Decoder implementation dedicated to be uses as custom payload decoder add-on in
+This SensorBox Data Decoder implementation is dedicated to be used as custom payload decoder add-on in
 [MQTT.fx](http://mqttfx.org).
 
 See also: [addon-commons](https://github.com/Jerady/addon-commons) and [mqttfx-payload-decoders](https://github.com/Jerady/mqttfx-payload-decoders).
@@ -84,7 +84,7 @@ into the addon directory of MQTT.fx
 `sbt run`
 
 Runs a Publisher to publish 10 MQTT messages with sensorboxdata.proto encoded payload.
-A per default it connects to Broker URL `tcp://localhost:1883` publishes by usind topic `sensorboxdata/demo`:
+A per default it connects to Broker URL `tcp://localhost:1883`. Messages are published to topic `sensorboxdata/demo`:
 
 
 ```bash
@@ -112,16 +112,16 @@ Message #9 published to sensorboxdata/demo
 Message #10 published to sensorboxdata/demoDisconnected
 [DONE]
 ```
-Meanwhile at MQTT.fx (note the choosen decoded at the bottom):
+Meanwhile at MQTT.fx (note the choosen payload decoder at the bottom):
 
 ![](images/mqttfx-proto-decoder.png)
 
 
-You can connect to a speecific broker name/ip and port by passing argument to the 'run' task: 
+You can connect to a speecific broker `<name>/<ip>:<port>` by passing argument to the `'run'` task: 
 
 `sbt "run 192.168.0.61:1883"`
 
-Additionally you can set a certain topic as 2nd :
+Additionally you can set a certain topic as 2nd argument:
 
 `sbt "run 192.168.0.61:1883 proto/demo"`
 
