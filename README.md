@@ -65,18 +65,23 @@ The proto case classes are created at `../target/scala-2.11/src_managed/main`.
 ## Create add-on package for MQTT.fx >=1.4.0
 
 `sbt assembly`
-
-Copy the package from
+ 
+creates a FatJar at
 
 `../target/scala-2.11/sensorbox-data-decoder-assembly-1.0.jar`
 
-into the addon directory of MQTT.fx
+Copy this package into the `"addons"` directory of MQTT.fx:
 
 | OS        | Add-on location          |
 |---|---|
 |**Mac OSX**|`[USER_HOME]/Library/Application Support/MQTT-FX/addons`|
 |**Windows**|`[USER_HOME]\AppData\Local\MQTT-FX\addons`|
 |**Linux**|`[USER_HOME]/MQTT-FX/addons`|
+
+MQTT.fx will find the Decoder during next start.
+Have a look at About / Add-ons to verfigy MQTT.fx has loaded the decoder:
+
+![](images/mqtt-about-addons.png)
 
 
 ## Publish demo MQTT messages
@@ -112,12 +117,11 @@ Message #9 published to sensorboxdata/demo
 Message #10 published to sensorboxdata/demoDisconnected
 [DONE]
 ```
-Meanwhile at MQTT.fx (note the choosen payload decoder at the bottom):
+Meanwhile at MQTT.fx... note the choosen payload decoder at the bottom:
 
 ![](images/mqttfx-proto-decoder.png)
 
-
-You can connect to a speecific broker `<name>/<ip>:<port>` by passing argument to the `'run'` task: 
+To connect to a specific broker pass `<name>/<ip>:<port>` to the `'run'` task: 
 
 `sbt "run 192.168.0.61:1883"`
 
